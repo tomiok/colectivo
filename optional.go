@@ -1,5 +1,7 @@
 package colectivo
 
+import "errors"
+
 type Optional struct {
 	V any
 }
@@ -10,8 +12,10 @@ func (o *Optional) Get() any {
 
 func (o *Optional) GetErr() (any, error) {
 	if o.IsPresent() {
-
+		return o.V, nil
 	}
+
+	return nil, errors.New("empty")
 }
 
 func (o *Optional) OrElse(a any) any {
